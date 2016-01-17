@@ -1,0 +1,20 @@
+{
+   "m_descr" : "This module combines multiple actors and temperature sensors to form a thermostat. The actor will be turned on off depending on the temperatures measured, a set-point defined by the thermostat and multiple windows.",
+   "devices_helper" : "Devices that are controlled by the thermostat",
+   "devices_label" : "Device",
+   "hysteresis_helper" : "Maximal delta between current and target temperature after which thermostat should turn on/off",
+   "hysteresis_label" : "Hysteresis",
+   "mode_cool" : "Cool",
+   "mode_heat" : "Heat",
+   "mode_label" : "Operation mode",
+   "switch_helper" : "Switch to turn on/off the thermostat operation. If no device is set this module will create a virtual switch.",
+   "switch_label" : "Switch",
+   "temperature_sensors_helper" : "Multiple temperature sensors. The measurement of the last updated sensor will be taken for the calculation.",
+   "temperature_sensors_label" : "Temperature sensor",
+   "thermostat_helper" : "A virtual thermostat device. If no device is set this module will create a virtual thermostat.",
+   "thermostat_label" : "Thermostat device",
+   "m_title" : "Advanced Virtual Thermostat",
+   "unit_temperature_label" : "Temperature Unit",
+   "window_sensors_helper" : "Will stop heating and cooling if open window was detected",
+   "window_sensors_label" : "Window sensors"
+}

@@ -1,0 +1,181 @@
+{
+    "dependencies": ["BaseModule"],
+    "singleton": false,
+    "category": "device_enhancements",
+    "author": "Maroš Kollár",
+    "homepage" : "https://github.com/maros/Zway-AdvancedThermostatDevice/",
+    "icon": "icon.png",
+    "moduleName":"AdvancedThermostatDevice",
+    "version": "1.0.0",
+    "maturity": "stable",
+    "repository": {
+        "type": "git",
+        "source" : "https://github.com/maros/Zway-AdvancedThermostatDevice"
+    },
+    "defaults": {
+        "title": "__m_title__",
+        "description": "__m_descr__",
+        "mode": "heat",
+        "scale": "C",
+        "hysteresis": 0.1
+    },
+    "schema": {
+        "type": "object",
+        "properties": {
+            "thermostat": {
+                "field": "enum",
+                "datasource": "namespaces",
+                "enum": "namespaces:devices_thermostat:deviceId"
+            },
+            "switch": {
+                "field": "enum",
+                "datasource": "namespaces",
+                "enum": "namespaces:devices_switchBinary:deviceId"
+            },
+            "devices": {
+                "type": "array",
+                "minItems": 1,
+                "items" : {
+                    "field": "enum",
+                    "datasource": "namespaces",
+                    "enum": "namespaces:devices_switchBinary:deviceId",
+                    "required": true
+                }
+            },
+            "temperatureSensors": {
+                "type": "array",
+                "minItems": 1,
+                "items" : {
+                    "field": "enum",
+                    "datasource": "namespaces",
+                    "enum": "namespaces:devices_sensorMultilevel:deviceId",
+                    "required": true
+                }
+            },
+            "windowSensors": {
+                "type": "array",
+                "items" : {
+                    "field": "enum",
+                    "datasource": "namespaces",
+                    "enum": "namespaces:devices_sensorBinary:deviceId",
+                    "required": true
+                }
+            },
+            "mode": {
+                "enum": ["heat","cool"],
+                "required": true
+            },
+            "hysteresis": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 5,
+                "required": true
+            },
+            "unitTemperature": {
+                "enum": ["celsius", "fahrenheit"],
+                "required": true
+            },
+            "maxTime": {
+                "type": "number"
+            },
+            "pauseTime": {
+                "type": "number"
+            }
+        },
+        "required": false
+    },
+    "options": {
+        "fields": {
+            "thermostat": {
+                "label": "__thermostat_label__",
+                "helper": "__thermostat_helper__",
+                "type": "select",
+                "datasource": "namespaces",
+                "field": "optionLabels",
+                "optionLabels": "namespaces:devices_thermostat:deviceName",
+                "order": 2
+            },
+            "switch": {
+                "label": "__switch_label__",
+                "helper": "__switch_helper__",
+                "type": "select",
+                "datasource": "namespaces",
+                "field": "optionLabels",
+                "optionLabels": "namespaces:devices_switchBinary:deviceName",
+                    "order": 3
+            },
+            "devices": {
+                "label": "__devices_label__",
+                "helper": "__devices_helper__",
+                "fields" : {
+                    "item" : {
+                        "type": "select",
+                        "datasource": "namespaces",
+                        "field": "optionLabels",
+                        "optionLabels": "namespaces:devices_switchBinary:deviceName"
+                    }
+                },
+            "order": 4
+            },
+            "temperatureSensors": {
+                "label": "__temperature_sensors_label__",
+                "helper": "__temperature_sensors_helper__",
+                "fields" : {
+                    "item" : {
+                        "type": "select",
+                        "datasource": "namespaces",
+                        "field": "optionLabels",
+                        "optionLabels": "namespaces:devices_sensorMultilevel:deviceName"
+                    }
+                },
+            "order": 5
+            },
+            "windowSensors": {
+                "label": "__window_sensors_label__",
+                "helper": "__window_sensors_helper__",
+                "fields" : {
+                    "item" : {
+                        "type": "select",
+                        "datasource": "namespaces",
+                        "field": "optionLabels",
+                        "optionLabels": "namespaces:devices_sensorBinary:deviceName"
+                    }
+                },
+            "order": 6
+            },
+            "mode": {
+                "order": 1,
+                "label": "__mode_label__",
+                "type": "select",
+                "optionLabels": ["__mode_heat__", "__mode_cool__"]
+            },
+            "hysteresis": {
+                "label": "__hysteresis_label__",
+                "type": "number",
+                "helper": "__hysteresis_helper__",
+                "order": 7
+            },
+            "unitTemperature": {
+                "label": "__unit_temperature_label__",
+                "type": "select",
+                "optionLabels" : [
+                                  "°C",
+                                  "°F"
+                               ],
+            "order": 8
+            },
+            "maxTime": {
+                "label": "__max_time_label__",
+                "helper": "__max_time_helper__",
+                "type": "number",
+                "order": 9
+            },
+            "pauseTime": {
+                "label": "__pause_time_label__",
+                "helper": "__pause_time_helper__",
+                "type": "number",
+                "order": 10
+            }
+        }
+    }
+}
