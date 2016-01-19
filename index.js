@@ -166,7 +166,7 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
     var windowOpen      = false;
     var now             = Math.floor(new Date().getTime() / 1000);
     var currentLevel    = self.getCurrentLevel();
-    var lastOff         = self.vDevSwitch.get('metrics:lastoff') || now;
+    var lastOff         = self.vDevSwitch.get('metrics:lastoff') || 0;
     var lastOn          = self.vDevSwitch.get('metrics:laston') || now;
     
     // Get window
