@@ -194,15 +194,6 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
     });
     currentTemp = measurements[0][1];
     
-    /*
-    self.log('Current temp '+currentTemp);
-    self.log('Current setp '+targetTemp);
-    self.log('Current leve '+currentLevel);
-    self.log('Current hyst '+hysteresis);
-    self.log('Current mode '+mode);
-    self.log('Current stat '+state);
-    */
-    
     if (state === 'off') {
         reason = 'switch';
         target = false;
