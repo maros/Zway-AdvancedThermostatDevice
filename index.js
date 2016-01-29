@@ -18,7 +18,6 @@ function AdvancedThermostatDevice (id, controller) {
     
     this.vDevThermostat     = undefined;
     this.vDevSwitch         = undefined;
-    this.cronName           = undefined;
 }
 
 inherits(AdvancedThermostatDevice, BaseModule);
@@ -33,8 +32,6 @@ AdvancedThermostatDevice.prototype.init = function (config) {
     AdvancedThermostatDevice.super_.prototype.init.call(this, config);
 
     var self = this;
-    
-    self.cronName           = 'AdvancedThermostatDevice.'+self.id+'.timeout';
 
     if (typeof(self.config.thermostat) === 'undefined') {
         self.log('Create thermostat');
