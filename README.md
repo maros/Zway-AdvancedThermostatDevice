@@ -1,11 +1,9 @@
 # Zway-AdvancedThermostatDevice
 
-This module turns off devices after a defined time of inactivity. Activity
-can be measured using multiple binary sensors/devices, like movement sensors
-or switches.
-
-For more advanced use-cases you could check out the MotionTrigger module at
-https://github.com/maros/Zway-MotionTrigger.
+This module combines an actor and a temperature sensor to form a thermostat. 
+The actor will be turned on off depending on the temperature measured and a 
+set-point defined by either a virtual thermostat provided in the config
+or alternatively created by this module.
 
 # Configuration
 
@@ -52,7 +50,7 @@ No events are emitted
 
 # Virtual Devices
 
-No virtual device is created
+Up to two virtual devices are created.
 
 # Installation
 
