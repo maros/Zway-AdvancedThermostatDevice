@@ -183,13 +183,26 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
         ]);
     });
     
-    // TODO average of all sensors weighted by age 
+    // Get all measurements
     measurements.sort(function(a,b) { 
         if (a[0] > b[0]) return -1;
         else if (a[0] <b[0]) return 1;
         return 0;
     });
-    currentTemp = measurements[0][1];
+    
+    // Reverse order
+    measurements.reverse();
+    
+    var average = 0;
+    var weight = 0;
+    _.each(measurements,function(measurement,index) {
+        weight  = weight + index + 1;
+        average = average + measurement[1] * (index + 1);
+    });
+    
+    currentTemp = average / weight;
+    
+    self.log('Average weight '+currentTemp);
     
     if (state === 'off') {
         reason = 'switch';
