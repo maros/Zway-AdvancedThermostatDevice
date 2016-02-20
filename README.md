@@ -19,7 +19,8 @@ virtual switch will be created.
 
 ## temperatureSensors
 
-Multiple temperature sensors
+Multiple temperature sensors. The measurements will be weightate based on 
+the last update timestamp
 
 ## windowSensors
 
