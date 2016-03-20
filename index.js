@@ -38,6 +38,7 @@ AdvancedThermostatDevice.prototype.init = function (config) {
         self.vDevThermostat = self.controller.devices.create({
             deviceId: "AdvancedThermostatDevice_Thermostat_" + this.id,
             defaults: {
+                probeType: 'thermostat_set_point',
                 metrics: {
                     scaleTitle: self.config.unitTemperature === 'celsius' ? '°C' : '°F',
                     level:      self.config.unitTemperature === 'celsius' ? 18 : 65,
@@ -66,6 +67,7 @@ AdvancedThermostatDevice.prototype.init = function (config) {
         // Create vdev switch
         self.vDevSwitch = self.controller.devices.create({
             deviceId: "AdvancedThermostatDevice_Switch_" + self.id,
+            probeType: 'thermostat_mode',
             defaults: {
                 metrics: {
                     level: 'off',
