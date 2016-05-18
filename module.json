@@ -6,7 +6,9 @@
       "hysteresis" : 0.1,
       "mode" : "heat",
       "scale" : "C",
-      "title" : "__m_title__"
+      "title" : "__m_title__",
+      "devices": [],
+      "temperatureSensors": []
    },
    "dependencies" : [
       "BaseModule"
