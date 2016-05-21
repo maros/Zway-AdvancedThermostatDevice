@@ -11,3 +11,5 @@ Please make sure that all required information is included and that all checkbox
 - [ ] Include log messages generated while running the highest log level. Log level can be set via /opt/z-way-server/config.xml (highest level = 0, file location may be different). Be sure to include enough context: Not only the line showing the error, but also a couple of lines before and after. Log file is usually located at /var/log/z-way-server.log
 
 - [ ] Append the configuration of the module. The configuration can be obtained by opening this URL in your browser http://#IP#:8083/ZAutomation/api/v1/instances/#INSTANCE-ID#
+
+- [ ] If applicable, please also include steps to reproduce.
