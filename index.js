@@ -32,6 +32,8 @@ AdvancedThermostatDevice.prototype.init = function (config) {
     AdvancedThermostatDevice.super_.prototype.init.call(this, config);
 
     var self = this;
+    self.minTemperature = self.config.minTemperature || self.config.unitTemperature === 'celsius' ? 15:60;
+    self.maxTemperature = self.config.minTemperature || self.config.unitTemperature === 'celsius' ? 32:90;
 
     if (typeof(self.config.thermostat) === 'undefined') {
         self.log('Create thermostat');
@@ -41,8 +43,9 @@ AdvancedThermostatDevice.prototype.init = function (config) {
                 metrics: {
                     scaleTitle: self.config.unitTemperature === 'celsius' ? '°C' : '°F',
                     level:      self.config.unitTemperature === 'celsius' ? 18 : 65,
-                    min:        self.config.unitTemperature === 'celsius' ? 10 : 50,
-                    max:        self.config.unitTemperature === 'celsius' ? 35 : 95,
+                    min:        self.minTemperature,
+                    max:        self.maxTemperature,
+                    step:       self.config.unitTemperature === 'celsius' ? 0.5 : 1,
                     icon:       'thermostat',
                     title:      self.langFile.m_title
                 }
@@ -166,7 +169,11 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
     var currentLevel    = self.getCurrentLevel();
     var lastOff         = self.vDevSwitch.get('metrics:lastoff') || 0;
     var lastOn          = self.vDevSwitch.get('metrics:laston') || now;
-    
+
+    // Set min/max
+    targetTemp = Math.max(targetTemp,self.minTemperature);
+    targetTemp = Math.min(targetTemp,self.maxTemperature);
+
     // Get window
     self.processDeviceList(self.config.windowSensors,function(deviceObject) {
         if (deviceObject.get('metrics:level') === 'on') {
