@@ -15,7 +15,7 @@ Description:
 function AdvancedThermostatDevice (id, controller) {
     // Call superconstructor first (AutomationModule)
     AdvancedThermostatDevice.super_.call(this, id, controller);
-    
+
     this.vDevThermostat     = undefined;
     this.vDevSwitch         = undefined;
 }
@@ -61,7 +61,7 @@ AdvancedThermostatDevice.prototype.init = function (config) {
             moduleId: this.id
         });
     }
-    
+
     if (typeof(self.config.switch) === 'undefined') {
         self.log('Create switch');
         // Create vdev switch
@@ -88,15 +88,15 @@ AdvancedThermostatDevice.prototype.init = function (config) {
             moduleId: this.id
         });
     }
-    
+
     setTimeout(_.bind(self.initCallback,self), 10000);
 };
 
 AdvancedThermostatDevice.prototype.initCallback = function() {
     var self = this;
-    
+
     self.callback = _.bind(self.checkTemp,self);
-    
+
     if (typeof(self.config.thermostat) !== 'undefined') {
         self.vDevThermostat = self.controller.devices.get(self.config.thermostat);
         self.vDevThermostat.on('modify:metrics:level',self.callback);
@@ -105,20 +105,20 @@ AdvancedThermostatDevice.prototype.initCallback = function() {
         self.vDevSwitch = self.controller.devices.get(self.config.switch);
         self.vDevSwitch.on('modify:metrics:level',self.callback);
     }
-    
+
     self.processDeviceList(self.config.windowSensors,function(deviceObject) {
         deviceObject.on('modify:metrics:level',self.callback,'window');
     });
     self.processDeviceList(self.config.temperatureSensors,function(deviceObject) {
         deviceObject.on('modify:metrics:level',self.callback);
     });
-    
+
     self.callback();
 };
 
 AdvancedThermostatDevice.prototype.stop = function() {
     var self = this;
-    
+
     // Remove bindings
     self.processDeviceList(self.config.windowSensors,function(deviceObject) {
         deviceObject.off('modify:metrics:level',self.callback);
@@ -126,7 +126,7 @@ AdvancedThermostatDevice.prototype.stop = function() {
     self.processDeviceList(self.config.temperatureSensors,function(deviceObject) {
         deviceObject.off('modify:metrics:level',self.callback);
     });
-    
+
     // Remove switch
     if (typeof(self.config.switch) === 'undefined') {
         self.controller.devices.remove(self.vDevSwitch.id);
@@ -134,7 +134,7 @@ AdvancedThermostatDevice.prototype.stop = function() {
         self.vDevSwitch.off('modify:metrics:level',self.callback);
     }
     self.vDevSwitch = null;
-    
+
     // Remove thermostat
     if (typeof(self.config.thermostat) === 'undefined') {
         self.controller.devices.remove(self.vDevThermostat.id);
@@ -142,9 +142,9 @@ AdvancedThermostatDevice.prototype.stop = function() {
         self.vDevThermostat.off('modify:metrics:level',self.callback);
     }
     self.vDevThermostat = null;
-    
+
     self.callback = undefined;
-    
+
     AdvancedThermostatDevice.super_.prototype.stop.call(this);
 };
 
@@ -154,7 +154,7 @@ AdvancedThermostatDevice.prototype.stop = function() {
 
 AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
     var self = this;
-    
+
     var currentTemp,target,reason;
     var targetTemp      = parseFloat(self.vDevThermostat.get('metrics:level'));
     var state           = self.vDevSwitch.get('metrics:level');
@@ -174,7 +174,7 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
             windowOpen = true;
         }
     });
-    
+
     // Get current temperature from most recent measurement
     self.processDeviceList(self.config.temperatureSensors,function(deviceObject) {
         measurements.push([
@@ -183,35 +183,35 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
             deviceObject
         ]);
     });
-    
+
     // Get all measurements
-    measurements.sort(function(a,b) { 
+    measurements.sort(function(a,b) {
         if (a[0] > b[0]) return -1;
         else if (a[0] <b[0]) return 1;
         return 0;
     });
-    
+
     // Reverse order
     measurements.reverse();
-    
+
     var average = 0;
     var weight = 0;
     _.each(measurements,function(measurement,index) {
         weight  = weight + index + 1;
         average = average + measurement[1] * (index + 1);
     });
-    
+
     currentTemp = average / weight;
-    
+
     self.log('Average weight '+currentTemp);
-    
+
     if (state === 'off') {
         reason = 'switch';
         target = false;
     // Check windows
     } else if (windowOpen
         && (
-            mode === 'cool' || 
+            mode === 'cool' ||
             (mode === 'heat' && currentTemp > self.vDevThermostat.get('metrics:min'))
             )
         ) {
@@ -248,7 +248,7 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
             }
         }
     }
-    
+
     if (typeof(target) === 'boolean') {
         self.log('Turning thermostat '+(target ? 'on':'off')+' due to '+reason);
         var targetCommand = target ? 'on':'off';
@@ -265,13 +265,13 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
 
 AdvancedThermostatDevice.prototype.getCurrentLevel = function() {
     var self = this;
-    
+
     var currentLevel = false;
     self.processDeviceList(self.config.devices,function(deviceObject) {
         if (deviceObject.get('metrics:level') === 'on') {
             currentLevel = true;
         }
     });
-    
+
     return currentLevel;
 };

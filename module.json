@@ -35,14 +35,12 @@
          "hysteresis" : {
             "helper" : "__hysteresis_helper__",
             "label" : "__hysteresis_label__",
-            "order" : 7,
-            "type" : "number"
+            "order" : 7
          },
          "maxTime" : {
             "helper" : "__max_time_helper__",
             "label" : "__max_time_label__",
             "order" : 9,
-            "type" : "number"
          },
          "mode" : {
             "label" : "__mode_label__",
@@ -57,7 +55,6 @@
             "helper" : "__pause_time_helper__",
             "label" : "__pause_time_label__",
             "order" : 10,
-            "type" : "number"
          },
          "switch" : {
             "datasource" : "namespaces",
