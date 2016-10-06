@@ -1,3 +1,9 @@
+1.02 2016 Oct 06, Thu
+    * Configurable min/max temperatures
+    * Cleanup
+    * Improve texts
+    * Set defaults
+
 1.01 2016 Apr 20, Wed
     * Version as number
     * Set probe type

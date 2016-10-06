@@ -3,14 +3,14 @@
    "category" : "device_enhancements",
    "defaults" : {
       "description" : "__m_descr__",
+      "devices" : [],
       "hysteresis" : 0.1,
+      "maxTemperature" : 30,
+      "minTemperature" : 15,
       "mode" : "heat",
       "scale" : "C",
-      "title" : "__m_title__",
-      "devices": [],
-      "temperatureSensors": [],
-      "minTemperature": 15,
-      "maxTemperature": 30
+      "temperatureSensors" : [],
+      "title" : "__m_title__"
    },
    "dependencies" : [
       "BaseModule"
@@ -39,10 +39,18 @@
             "label" : "__hysteresis_label__",
             "order" : 7
          },
+         "maxTemperature" : {
+            "label" : "__max_temperature_label__",
+            "order" : 11
+         },
          "maxTime" : {
             "helper" : "__max_time_helper__",
             "label" : "__max_time_label__",
             "order" : 8
+         },
+         "minTemperature" : {
+            "label" : "__min_temperature_label__",
+            "order" : 12
          },
          "mode" : {
             "label" : "__mode_label__",
@@ -98,14 +106,6 @@
             "order" : 10,
             "type" : "select"
          },
-         "maxTemperature" : {
-            "order" : 11,
-            "label" : "__max_temperature_label__"
-         },
-         "minTemperature" : {
-            "order" : 12,
-            "label" : "__min_temperature_label__"
-         },
          "windowSensors" : {
             "fields" : {
                "item" : {
@@ -143,10 +143,10 @@
             "required" : true,
             "type" : "number"
          },
-         "maxTime" : {
+         "maxTemperature" : {
             "type" : "number"
          },
-         "maxTemperature" : {
+         "maxTime" : {
             "type" : "number"
          },
          "minTemperature" : {
@@ -203,5 +203,5 @@
       "type" : "object"
    },
    "singleton" : false,
-   "version" : 1.01
+   "version" : "1.02"
 }
