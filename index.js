@@ -32,8 +32,8 @@ AdvancedThermostatDevice.prototype.init = function (config) {
     AdvancedThermostatDevice.super_.prototype.init.call(this, config);
 
     var self = this;
-    self.minTemperature = self.config.minTemperature || self.config.unitTemperature === 'celsius' ? 15:60;
-    self.maxTemperature = self.config.minTemperature || self.config.unitTemperature === 'celsius' ? 32:90;
+    self.minTemperature = self.config.minTemperature || (self.config.unitTemperature === 'celsius' ? 15:60);
+    self.maxTemperature = self.config.maxTemperature || (self.config.unitTemperature === 'celsius' ? 32:90);
 
     if (typeof(self.config.thermostat) === 'undefined') {
         self.log('Create thermostat');
@@ -43,14 +43,16 @@ AdvancedThermostatDevice.prototype.init = function (config) {
                 metrics: {
                     scaleTitle: self.config.unitTemperature === 'celsius' ? '°C' : '°F',
                     level:      self.config.unitTemperature === 'celsius' ? 18 : 65,
-                    min:        self.minTemperature,
-                    max:        self.maxTemperature,
-                    step:       self.config.unitTemperature === 'celsius' ? 0.5 : 1,
                     icon:       'thermostat',
+                    step:       self.config.unitTemperature === 'celsius' ? 0.5 : 1,
                     title:      self.langFile.m_title
                 }
             },
             overlay: {
+                metrics: {
+                    min:        self.minTemperature,
+                    max:        self.maxTemperature,
+                },
                 probeType: 'thermostat_set_point',
                 deviceType: "thermostat"
             },
