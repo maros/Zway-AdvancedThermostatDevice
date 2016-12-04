@@ -160,7 +160,7 @@ AdvancedThermostatDevice.prototype.stop = function() {
 AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
     var self = this;
 
-    var currentTemp,target,reason;
+    var currentTemp,targetLevel,reason;
     var targetTemp      = parseFloat(self.vDevThermostat.get('metrics:level'));
     var state           = self.vDevSwitch.get('metrics:level');
     var mode            = self.config.mode;
@@ -216,7 +216,7 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
 
     if (state === 'off') {
         reason = 'switch';
-        target = false;
+        targetLevel = false;
     // Check windows
     } else if (windowOpen
         && (
@@ -225,42 +225,43 @@ AdvancedThermostatDevice.prototype.checkTemp = function(vDev) {
             )
         ) {
         reason = 'open window';
-        target = false;
+        targetLevel = false;
     // Check max time
     } else if (typeof(self.config.maxTime) === 'number'
         && self.config.maxTime > 0
         && currentLevel === true
         && (now - lastOn) > (self.config.maxTime * 60)) {
         reason = 'max time';
-        target = false;
+        targetLevel = false;
     // Check pause time
     } else if (typeof(self.config.pauseTime) === 'number'
         && self.config.pauseTime > 0
         && currentLevel === false
         && (now - lastOff) < (self.config.pauseTime * 60)) {
         reason = 'pause time';
-        // target = false;
+        // targetLevel = false;
     // Check setpoint
     } else {
         reason = 'setpoint';
         if (mode === 'heat') {
             if ((currentTemp - hysteresis) >= targetTemp) {
-                target = false;
+                targetLevel = false;
             } else if ((currentTemp + hysteresis) <= targetTemp) {
-                target = true;
+                targetLevel = true;
             }
         } else if (mode === 'cool') {
             if ((currentTemp + hysteresis) <= targetTemp) {
-                target = false;
+                targetLevel = false;
             } else if ((currentTemp - hysteresis) >= targetTemp) {
-                target = true;
+                targetLevel = true;
             }
         }
     }
 
-    if (typeof(target) === 'boolean') {
-        self.log('Turning thermostat '+(target ? 'on':'off')+' due to '+reason);
-        var targetCommand = target ? 'on':'off';
+    if (typeof(targetLevel) === 'boolean'
+        && targetLevel !== currentLevel) {
+        var targetCommand = targetLevel ? 'on':'off';
+        self.log('Turning thermostat '+targetCommand+' due to '+reason);
         self.vDevSwitch.set('metrics:last'+targetCommand,now);
         self.processDeviceList(self.config.devices,function(deviceObject) {
             if (deviceObject.get('metrics:level') !== targetCommand) {
