@@ -44,7 +44,6 @@ AdvancedThermostatDevice.prototype.init = function (config) {
                     scaleTitle: self.config.unitTemperature === 'celsius' ? '°C' : '°F',
                     level:      self.config.unitTemperature === 'celsius' ? 18 : 65,
                     icon:       'thermostat',
-                    step:       self.config.unitTemperature === 'celsius' ? 0.5 : 1,
                     title:      self.langFile.m_title
                 }
             },
@@ -52,6 +51,7 @@ AdvancedThermostatDevice.prototype.init = function (config) {
                 metrics: {
                     min:        self.minTemperature,
                     max:        self.maxTemperature,
+                    step:       self.config.unitTemperature === 'celsius' ? 0.2 : 0.5,
                 },
                 probeType: 'thermostat_set_point',
                 deviceType: "thermostat"
