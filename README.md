@@ -43,7 +43,9 @@ Temperature Unit: Metric or imperial
 ## maxTime, pauseTime
 
 Optional setting (in minutes) for maximum operation time and pauses between
-operation.
+operation. If maximum operaton time was reached the switch will be turned off,
+regardless of the current temperature. Furthermore the switch will not be tuned
+on before the minimum pause time was reached.
 
 ## maxTemperature, minTemperature
 

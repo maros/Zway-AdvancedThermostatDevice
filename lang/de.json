@@ -16,7 +16,7 @@
    "pause_time_label" : "Pause",
    "switch_helper" : "Schalter für das Heiz-/Kühlgerät. Wenn kein Gerät konfiguriert ist, wird ein virtueller Schalter ersrellt.",
    "switch_label" : "Schalter",
-   "temperature_sensors_helper" : "Mehrere Temperatursensoren zum Erfassen der aktuellen Temperatur. Der aktuellste Sensor wird für die Steuerung herangezogen.",
+   "temperature_sensors_helper" : "Mehrere Temperatursensoren zum Erfassen der aktuellen Temperatur. Wenn mehrere Sensoren konfiguriert sind, wird ein nach Aktualität gewichteter Durschnittswert errechnet.",
    "temperature_sensors_label" : "Temperatur Sensoren",
    "thermostat_helper" : "Ein virtuelles Thermostat zur Steuerung der Solltemperatur. Wenn kein Thermostat konfiguriert ist, wird ein virtuelles Thermostat ersrellt.",
    "thermostat_label" : "Thermostat",

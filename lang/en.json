@@ -1,6 +1,6 @@
 {
-   "devices_helper" : "Devices that are controlled by the thermostat",
-   "devices_label" : "Device",
+   "devices_helper" : "Devices that should be controlled by the thermostat",
+   "devices_label" : "Devices",
    "hysteresis_helper" : "Maximal delta between current and target temperature after which thermostat should turn on/off. eg. 1°C",
    "hysteresis_label" : "Hysteresis",
    "m_descr" : "This module combines multiple actors and temperature sensors to form a thermostat. The actor will be turned on off depending on the temperatures measured, a setpoint defined by the thermostat. Additionally this module checks for opened windows and ensures pauses between and maximum length of heating intervals.<br>Check <a href=https://github.com/maros/Zway-AdvancedThermostatDevice/blob/master/README.md>github.com/maros/Zway-AdvancedThermostatDevice</a> for detailed documentation.",
@@ -16,11 +16,11 @@
    "pause_time_label" : "Pause time",
    "switch_helper" : "Switch to turn on/off the thermostat operation. If no device is set this module will create a virtual switch.",
    "switch_label" : "Switch",
-   "temperature_sensors_helper" : "Multiple temperature sensors. The measurement of the last updated sensor will be taken for the calculation.",
+   "temperature_sensors_helper" : "Multiple temperature sensors. If multiple sensors are set the average temperature will be weightet by the update times of the sensors",
    "temperature_sensors_label" : "Temperature sensor",
-   "thermostat_helper" : "A virtual thermostat device. If no device is set this module will create a virtual thermostat.",
+   "thermostat_helper" : "A virtual thermostat device. If no device is set this module will create a virtual thermostat widhet.",
    "thermostat_label" : "Thermostat device",
    "unit_temperature_label" : "Temperature Unit",
-   "window_sensors_helper" : "Will stop heating and cooling if open window was detected",
+   "window_sensors_helper" : "Will stop heating or cooling if an open window was detected",
    "window_sensors_label" : "Window sensors"
 }
