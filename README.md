@@ -45,11 +45,11 @@ Temperature Unit: Metric or imperial
 Optional setting (in minutes) for maximum operation time and pauses between
 operation. If maximum operaton time was reached the switch will be turned off,
 regardless of the current temperature. Furthermore the switch will not be tuned
-on before the minimum pause time was reached.
+on again before the minimum pause time has elapsed.
 
 ## maxTemperature, minTemperature
 
-Maximun and minimum temperature for thermostat
+Maximun and minimum temperature for thermostat widget.
 
 # Events
 
